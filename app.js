@@ -63,7 +63,15 @@ const checkValidityOfQuery = (request, response, next) => {
     }
   }
   if (date != "") {
-    if (isValid(parseISO(date))) {
+    const dateArray = date.split("-");
+    const year = dateArray[0];
+    let month = dateArray[1];
+    const day = dateArray[2];
+    if (month.length == 1) {
+      month = "0" + month;
+    }
+    if (isValid(parseISO(`${year}-${month}-${day}`))) {
+      console.log("Valid date");
     } else {
       console.log("Error in validation");
       response.status(400);
@@ -113,8 +121,17 @@ const checkValidityOfBody = (request, response, next) => {
     }
   }
   if (dueDate != "") {
-    if (isValid(parseISO(dueDate))) {
+    const dateArray = dueDate.split("-");
+    const year = dateArray[0];
+    let month = dateArray[1];
+    const day = dateArray[2];
+    if (month.length == 1) {
+      month = "0" + month;
+    }
+    if (isValid(parseISO(`${year}-${month}-${day}`))) {
+      console.log("Valid date");
     } else {
+      console.log("Error in validation");
       response.status(400);
       response.send("Invalid Due Date");
       return;

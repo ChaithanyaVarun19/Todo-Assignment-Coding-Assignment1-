@@ -4,7 +4,7 @@ GET http://localhost:3000/todos/?category=LEARNING
 GET http://localhost:3000/todos/2
 
 ###
-GET http://localhost:3000/agenda/?date=2021-02-22
+GET http://localhost:3000/agenda/?date=2021-4-02
 
 ###
 
@@ -13,11 +13,11 @@ Content-Type: application/json
 
 {
  "id": 10,
- "todo": "Help Maha",
+ "todo": "Help Lakshmi",
  "priority": "HIGH",
  "status": "TO DO",
  "category": "HOME",
- "dueDate": "2021-02-22"
+ "dueDate": "2022-04-22"
 }
 
 ###
