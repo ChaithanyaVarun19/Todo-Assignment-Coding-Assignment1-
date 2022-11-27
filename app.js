@@ -66,9 +66,12 @@ const checkValidityOfQuery = (request, response, next) => {
     const dateArray = date.split("-");
     const year = dateArray[0];
     let month = dateArray[1];
-    const day = dateArray[2];
+    let day = dateArray[2];
     if (month.length == 1) {
       month = "0" + month;
+    }
+    if (day.length == 1) {
+      day = "0" + day;
     }
     if (isValid(parseISO(`${year}-${month}-${day}`))) {
       console.log("Valid date");
@@ -124,9 +127,12 @@ const checkValidityOfBody = (request, response, next) => {
     const dateArray = dueDate.split("-");
     const year = dateArray[0];
     let month = dateArray[1];
-    const day = dateArray[2];
+    let day = dateArray[2];
     if (month.length == 1) {
       month = "0" + month;
+    }
+    if (day.length == 1) {
+      day = "0" + day;
     }
     if (isValid(parseISO(`${year}-${month}-${day}`))) {
       console.log("Valid date");
@@ -184,14 +190,17 @@ app.get("/todos/:todoId/", async (request, response) => {
 //Get the todo with a specific due date API
 
 app.get("/agenda/", checkValidityOfQuery, async (request, response) => {
-  console.log("Error in API");
+  console.log("Entering the API");
   const { date } = request.query;
   const dateArray = date.split("-");
   const year = dateArray[0];
   let month = dateArray[1];
-  const day = dateArray[2];
+  let day = dateArray[2];
   if (month.length == 1) {
     month = "0" + month;
+  }
+  if (day.length == 1) {
+    day = "0" + day;
   }
   const formattedDate = `${year}-${month}-${day}`;
   console.log(formattedDate);
