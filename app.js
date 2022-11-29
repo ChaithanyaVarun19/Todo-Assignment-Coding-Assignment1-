@@ -125,7 +125,7 @@ const checkValidityOfBody = (request, response, next) => {
   }
   if (dueDate != "") {
     const dateArray = dueDate.split("-");
-    const year = dateArray[0];
+    let year = dateArray[0];
     let month = dateArray[1];
     let day = dateArray[2];
     if (month.length == 1) {
@@ -134,6 +134,11 @@ const checkValidityOfBody = (request, response, next) => {
     if (day.length == 1) {
       day = "0" + day;
     }
+    if (year.length < 4) {
+      year = `${(4 - year.length) * "0"}${year}`;
+      console.log(year);
+    }
+
     if (isValid(parseISO(`${year}-${month}-${day}`))) {
       console.log("Valid date");
     } else {
@@ -218,9 +223,10 @@ app.post("/todos/", checkValidityOfBody, async (request, response) => {
   console.log(priority);
   console.log(category);
   console.log(dueDate);
+  const date = format(new Date(dueDate), "yyyy-MM-dd");
 
   const addTodoQuery = `
-    INSERT INTO todo (id,todo,priority,status,category,due_date) VALUES (${id},'${todo}','${priority}','${status}','${category}','${dueDate}')
+    INSERT INTO todo (id,todo,priority,status,category,due_date) VALUES (${id},'${todo}','${priority}','${status}','${category}','${date}')
     `;
   const dbResponse = await db.run(addTodoQuery);
   console.log("Updated DB");
